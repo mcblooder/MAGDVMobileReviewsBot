@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./database:/app/database
+    restart: "always"
+    container_name: magdv-reviews-bot-container
