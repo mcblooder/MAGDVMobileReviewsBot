@@ -8,11 +8,11 @@ class Logger {
         var prefix: String {
             switch self {
             case .info:
-                return ""
+                return "ℹ️ "
             case .warning:
-                return "\u{001B}[0;33m"
+                return "⚠️ \u{001B}[0;33m"
             case .error:
-                return "\u{001B}[0;31m"
+                return "🚨 \u{001B}[0;31m"
             }
         }
         

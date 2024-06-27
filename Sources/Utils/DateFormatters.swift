@@ -7,9 +7,12 @@ class DateFormatters {
     static let iso = ISO8601DateFormatter()
     static let humanReadable = {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ru_RU")
+        
+        if let localeIdentifier = Config.app.dateFormatterLocale {
+            dateFormatter.locale = Locale(identifier: localeIdentifier)
+        }
+        
         dateFormatter.dateFormat = "LLLL d, HH:MM"
         return dateFormatter
     }()
-
 }

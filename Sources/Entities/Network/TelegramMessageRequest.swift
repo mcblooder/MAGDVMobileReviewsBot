@@ -2,7 +2,7 @@ struct TelegramMessageRequest: Encodable {
     let chatID: Int
     let threadID: Int?
     let text: String
-    let parseMode = "HTML"
+    let parseMode: String = "HTML"
     
     enum CodingKeys: String, CodingKey {
         case chatID = "chat_id"

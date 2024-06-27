@@ -42,8 +42,8 @@ RUN apt-get update && apt-get install -y \
 # Copy executable from builder
 COPY --from=builder /app/.build/release/MAGDVMobileReviewsBot /app/MAGDVMobileReviewsBot
 
-# Create a cron job script to run every hour
-RUN echo "0 * * * * cd /app && /app/MAGDVMobileReviewsBot > /proc/1/fd/1 2>/proc/1/fd/2" > /etc/cron.d/swift-cron
+# Create a cron job script to run every 30th minute
+RUN echo "*/30 * * * * cd /app && /app/MAGDVMobileReviewsBot > /proc/1/fd/1 2>/proc/1/fd/2" > /etc/cron.d/swift-cron
 
 # Give execution rights to the cron job file
 RUN chmod 0644 /etc/cron.d/swift-cron

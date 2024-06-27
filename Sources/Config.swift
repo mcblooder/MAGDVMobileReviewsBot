@@ -4,21 +4,18 @@ class Config {
 
     private init() { }
 
-    static let databaseFilename: String = "./database/db.sqlite"
+    static let databaseFilename: String = "./data/db.sqlite"
+    static var app: AppConfig!
 
-//    static let telegramBotToken: String = {
-//        guard let token: String = ProcessInfo.processInfo.environment["MAGDV_REVIEWS_BOT_TOKEN"] else {
-//            fatalError("MAGDV_REVIEWS_BOT_TOKEN not set in environment variables")
-//        }
-//        return token
-//    }()
-    
-    static let telegramBotToken = "7387911920:AAEadNh0e6vjdONPKrzwo9EnROp9PwN3l7w"
-    
-    static let chatID: Int = -1002157652922
-    static let messageSendMaxRetries: UInt = 3
-    static let messageSendDelay: TimeInterval = 0.25
-    static let messageSendRetryDelay: TimeInterval = 60
-    
-    static var verbose: Bool = false
+    static var verbose: Bool = false   
+
+    static func load() {
+        do {
+            let configData = try Data(contentsOf: URL(fileURLWithPath: "./data/config.json"))
+            Config.app = try JSONDecoder().decode(AppConfig.self, from: configData)
+        } catch {
+            Logger.log("Error parsing ./data/config.json: \(error)", type: .error)
+            fatalError()
+        }
+    }
 }

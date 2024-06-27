@@ -1,7 +1,9 @@
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+
 import Foundation
 
 // MARK: - AppStoreReviewsResponse
-struct AppStoreReviewsResponse: Codable {
+struct AppStoreReviewsResponse: Decodable {
     let reviews: [AppStoreReview]
 
     enum CodingKeys: String, CodingKey {
@@ -9,10 +11,10 @@ struct AppStoreReviewsResponse: Codable {
     }
 }
 
-// MARK: - Review
-struct AppStoreReview: Codable {
+// MARK: - AppStoreReview
+struct AppStoreReview: Decodable {
     let id: String
-    let attributes: ReviewAttributes
+    let attributes: AppStoreReviewAttributes
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -20,9 +22,9 @@ struct AppStoreReview: Codable {
     }
 }
 
-// MARK: - Attributes
-struct ReviewAttributes: Codable {
-    let rating: Int
+// MARK: - AppStoreReviewAttributes
+struct AppStoreReviewAttributes: Decodable {
+    let rating: UInt8
     let title: String
     let body: String
     let reviewerNickname: String
@@ -36,33 +38,5 @@ struct ReviewAttributes: Codable {
         case reviewerNickname = "reviewerNickname"
         case createdDate = "createdDate"
         case territory = "territory"
-    }
-}
-
-// MARK: - Review Extension
-extension AppStoreReview {
-
-    var description: String {
-        let rating = switch attributes.rating {
-            case 5: "★★★★★"
-            case 4: "★★★★☆"
-            case 3: "★★★☆☆"
-            case 2: "★★☆☆☆"
-            case 1: "★☆☆☆☆"
-            default: "⚝"
-        }
-        
-        
-        var dateString: String = ""
-
-        if let date = DateFormatters.iso.date(from: attributes.createdDate) {
-            dateString = DateFormatters.humanReadable.string(from: date)
-        } 
-
-        return """
-        \(dateString), app_name_here, \(attributes.reviewerNickname) \(attributes.territory.unicodeEmojiFlag), \(rating)
-        \(attributes.title)
-        \(attributes.body)
-        """
     }
 }

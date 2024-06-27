@@ -13,6 +13,8 @@ func printUsage() {
       --cron             Run in a CRON mode (run once, then exit) [default]
       --verbose          Enable verbose mode
       --help             Display this help message
+    
+    Default config.json location is ./data/config.json
     """
     print(usage)
 }
@@ -57,6 +59,8 @@ Config.verbose = true
 #else
 Config.verbose = arguments.verbose
 #endif
+
+Config.load()
 
 if arguments.cronMode {
     ReviewsNotifyTask.run()
