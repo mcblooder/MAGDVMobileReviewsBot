@@ -1,12 +1,10 @@
-# Build
+# Mobile Reviews Bot (GooglePlay/AppStore)
 
+## Build
 swift build -v --static-swift-stdlib -c release
 
-
-#
-sudo docker compose up --build
-
-team id 
-KFA6VPVX93
-key id
-MR9G8ULX3M
+## TODO:
+- README.md
+- Separate imports & packages for macOS/others
+- Check windows build
+- Customizable config and database path
